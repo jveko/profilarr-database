@@ -1,0 +1,200 @@
+name: 1080p Streaming
+description: 'Optimized for Zurg + rclone + Jellyfin streaming workflows. Prioritizes 1080p content with balanced file sizes for efficient bandwidth usage while maintaining high quality. Enhanced with resolution-specific streaming service formats and codec efficiency.
+
+- Primary target: 1080p WEB-DL from major streaming services (Netflix, Amazon Prime, Disney+)
+- Codec priority: h265/HEVC > x265 > x264 (streaming-compatible) for efficiency vs compatibility balance
+- Audio priority: AAC > Dolby Digital+ > Dolby Digital for streaming efficiency  
+- Resolution strategy: 1080p primary, 720p fallback, SD emergency fallback
+- Quality tiers: Includes streaming-optimized encodes (Balanced Tiers) over transparency-focused ones
+- Future-ready: Limited AV1 support for emerging codec adoption'
+tags:
+- 1080p
+- Streaming
+- Bandwidth Optimized
+- Direct Play
+- WEB-DL
+upgradesAllowed: true
+minCustomFormatScore: 0
+upgradeUntilScore: 400
+minScoreIncrement: 1
+custom_formats:
+# Primary 1080p WEB-DL Sources (Highest scores for best streaming sources)
+- name: 1080p
+  score: 250
+- name: Amazon Prime (1080p)
+  score: 240
+- name: Netflix (1080p)
+  score: 240
+- name: Disney+ (1080p)
+  score: 240
+- name: Apple TV+ (1080p)
+  score: 230
+- name: HBO Max (1080p)
+  score: 230
+- name: Max (1080p)
+  score: 230
+- name: Amazon Prime
+  score: 220
+- name: Netflix
+  score: 220
+- name: Disney+
+  score: 220
+- name: Apple TV+
+  score: 210
+- name: HBO Max
+  score: 210
+- name: Max
+  score: 210
+- name: Paramount+
+  score: 200
+- name: Peacock
+  score: 200
+- name: Hulu
+  score: 190
+- name: iTunes
+  score: 190
+- name: Roku
+  score: 180
+- name: iTunes (Missing)
+  score: 170
+
+# Streaming-optimized quality tiers and special editions
+- name: 1080p Balanced Tier 1
+  score: 160
+- name: 1080p Balanced Tier 2
+  score: 150
+- name: 1080p Golden Popcorn
+  score: 140
+- name: Special Edition
+  score: 130
+- name: WEBRip
+  score: 120
+
+# Codec preferences (h265/x265 for efficiency, x264 for compatibility, AV1 for future)
+- name: h265
+  score: 60
+- name: h265 (Missing)
+  score: 55
+- name: x265
+  score: 50
+- name: x264 (Streaming)
+  score: 45
+- name: AV1
+  score: 35
+
+# 720p Fallback when no 1080p available
+- name: Amazon Prime (720p)
+  score: 120
+- name: Netflix (720p)
+  score: 120
+- name: Disney+ (720p)
+  score: 120
+- name: 720p Golden Popcorn
+  score: 110
+- name: 720p
+  score: 100
+
+# SD Emergency Fallback when no 720p/1080p available
+- name: SD Golden Popcorn
+  score: 80
+- name: SD Quality Tier 1
+  score: 70
+- name: SD Quality Tier 2
+  score: 60
+- name: DVD Remux
+  score: 50
+
+# Audio preferences (efficient for streaming)
+- name: AAC
+  score: 15
+- name: Dolby Digital +
+  score: 12
+- name: Dolby Digital
+  score: 10
+
+# Repack preferences
+- name: Repack3
+  score: 8
+- name: Repack2
+  score: 7
+- name: Repack1
+  score: 6
+
+# Block unwanted formats (wrong resolution, inefficient codecs)
+- name: 2160p
+  score: -9999
+- name: 480p
+  score: -9999
+- name: 540p
+  score: -9999
+- name: 576p
+  score: -9999
+- name: 360p
+  score: -9999
+- name: 3D
+  score: -9999
+- name: B&W
+  score: -9999
+- name: Blu-ray Remux
+  score: -9999
+- name: Extras
+  score: -9999
+- name: Full Disc
+  score: -9999
+- name: Full Disc (Quality Match)
+  score: -9999
+- name: HDR
+  score: -9999
+- name: HDR10
+  score: -9999
+- name: HDR10+
+  score: -9999
+- name: Dolby Vision
+  score: -9999
+- name: Remux
+  score: -9999
+- name: UHD Bluray
+  score: -9999
+- name: Upscaled
+  score: -9999
+- name: VVC
+  score: -9999
+
+qualities:
+- id: -1
+  name: 1080p Streaming
+  description: 1080p content optimized for streaming with balanced file sizes
+  qualities:
+  - id: 9
+    name: WEBDL-1080p
+  - id: 10
+    name: Bluray-1080p
+  - id: 11
+    name: WEBRip-1080p
+- id: -2
+  name: 720p Fallback
+  description: 720p content when 1080p unavailable
+  qualities:
+  - id: 6
+    name: WEBDL-720p
+  - id: 4
+    name: Bluray-720p
+  - id: 7
+    name: WEBRip-720p
+- id: -3
+  name: SD Emergency Fallback
+  description: Standard definition content when no HD available
+  qualities:
+  - id: 19
+    name: WEBDL-480p
+  - id: 20
+    name: WEBRip-480p
+  - id: 22
+    name: DVD
+  - id: 24
+    name: SDTV
+upgrade_until:
+  id: -1
+  name: 1080p Streaming
+  description: 1080p content optimized for streaming with balanced file sizes
+language: must_original

@@ -1,11 +1,12 @@
 name: 720p Streaming
-description: 'Optimized for Zurg + rclone + Jellyfin streaming workflows. Prioritizes 720p content with minimal file sizes for efficient bandwidth usage and fast streaming startup. Targets WEB-DL sources for best quality-to-size ratio with codec compatibility for direct play in Jellyfin.
+description: 'Optimized for Zurg + rclone + Jellyfin streaming workflows. Prioritizes 720p content with minimal file sizes for efficient bandwidth usage and fast streaming startup. Enhanced with resolution-specific streaming service formats and improved codec compatibility.
 
-- Primary target: 720p WEB-DL from major streaming services
-- Secondary: Efficient x265 encodes for smallest file sizes  
-- Compatibility: x264 fallback for older devices
-- Fallback: SD content when 720p unavailable
-- Audio: Prioritizes lossy codecs (AAC, DD) for streaming efficiency'
+- Primary target: 720p WEB-DL from major streaming services (Netflix, Amazon Prime, Disney+)
+- Codec priority: h265/HEVC > x265 > x264 (streaming-compatible) for efficiency vs compatibility balance  
+- Audio priority: AAC > Dolby Digital+ > Dolby Digital for streaming efficiency
+- Strict resolution filtering: Blocks all non-720p content except SD fallback
+- Fallback: SD Golden Popcorn and quality tiers when 720p unavailable
+- Future-ready: Limited AV1 support for emerging codec adoption'
 tags:
 - 720p
 - Streaming
@@ -20,6 +21,12 @@ custom_formats:
 # Primary 720p WEB-DL Sources (Highest scores for best streaming sources)
 - name: 720p
   score: 200
+- name: Amazon Prime (720p)
+  score: 190
+- name: Netflix (720p)
+  score: 190
+- name: Disney+ (720p)
+  score: 190
 - name: Amazon Prime
   score: 180
 - name: Netflix
@@ -53,11 +60,17 @@ custom_formats:
 - name: WEBRip
   score: 100
 
-# Codec preferences (x265 for efficiency, x264 for compatibility)
-- name: x265
+# Codec preferences (h265/x265 for efficiency, x264 for compatibility, AV1 for future)
+- name: h265
+  score: 55
+- name: h265 (Missing)
   score: 50
-- name: x264
+- name: x265
+  score: 45
+- name: x264 (Streaming)
   score: 40
+- name: AV1
+  score: 30
 
 # SD Fallback when no 720p available
 - name: SD Golden Popcorn
@@ -71,10 +84,10 @@ custom_formats:
 
 # Audio preferences (efficient for streaming)
 - name: AAC
-  score: 10
-- name: Dolby Digital
-  score: 10
+  score: 15
 - name: Dolby Digital +
+  score: 12
+- name: Dolby Digital
   score: 10
 
 # Repack preferences
@@ -90,13 +103,19 @@ custom_formats:
   score: -9999
 - name: 2160p
   score: -9999
+- name: 480p
+  score: -9999
+- name: 540p
+  score: -9999
+- name: 576p
+  score: -9999
+- name: 360p
+  score: -9999
 - name: 3D
   score: -9999
 - name: B&W
   score: -9999
 - name: Blu-ray Remux
-  score: -9999
-- name: DVD Remux
   score: -9999
 - name: Extras
   score: -9999

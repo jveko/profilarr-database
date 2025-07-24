@@ -1,0 +1,21 @@
+name: x264 (Streaming)
+description: Matches 'x264' codec specifically for streaming profiles, allows WEB-DL sources for compatibility
+tags:
+- Codec
+- Streaming
+conditions:
+- name: x264
+  negate: false
+  pattern: x264
+  required: true
+  type: release_title
+tests:
+- expected: true
+  id: 1
+  input: "Movie.2024.720p.WEB-DL.DD5.1.x264-GROUP"
+- expected: true
+  id: 2
+  input: "Show.S01E01.720p.AMZN.WEB-DL.AAC.x264-NTb"
+- expected: false
+  id: 3
+  input: "Movie.2024.720p.WEB-DL.x265.H.264-GROUP"

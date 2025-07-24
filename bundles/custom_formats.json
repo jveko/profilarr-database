@@ -2168,6 +2168,76 @@
     "_id": "720p"
   },
   {
+    "name": "AAC",
+    "description": "Matches 'AAC' audio codec for efficient streaming, with negation to avoid conflicts",
+    "tags": [
+      "Audio",
+      "Codec"
+    ],
+    "conditions": [
+      {
+        "name": "AAC",
+        "negate": false,
+        "pattern": "\\bAAC(\\b|\\d)",
+        "required": true,
+        "type": "release_title"
+      },
+      {
+        "name": "Not PCM",
+        "negate": true,
+        "pattern": "\\b(l?)PCM(\\b|\\d)",
+        "required": false,
+        "type": "release_title"
+      },
+      {
+        "name": "Not DTS",
+        "negate": true,
+        "pattern": "\\bDTS(\\b|\\d)",
+        "required": false,
+        "type": "release_title"
+      },
+      {
+        "name": "Not TrueHD",
+        "negate": true,
+        "pattern": "True[ .-]?HD[ .-]?",
+        "required": false,
+        "type": "release_title"
+      },
+      {
+        "name": "Not FLAC",
+        "negate": true,
+        "pattern": "\\bFLAC(\\b|\\d)",
+        "required": false,
+        "type": "release_title"
+      },
+      {
+        "name": "Not Dolby Digital",
+        "negate": true,
+        "pattern": "\\bDD[^a-z+]|(?<!e)ac3",
+        "required": false,
+        "type": "release_title"
+      }
+    ],
+    "tests": [
+      {
+        "expected": true,
+        "id": 1,
+        "input": "Movie.2024.720p.WEB-DL.AAC.2.0.H.264-GROUP"
+      },
+      {
+        "expected": false,
+        "id": 2,
+        "input": "Show.S01E01.720p.AMZN.WEB-DL.DD+5.1.AAC.x264-NTb"
+      },
+      {
+        "expected": false,
+        "id": 3,
+        "input": "Movie.2024.720p.WEB-DL.DD5.1.H.264-GROUP"
+      }
+    ],
+    "_id": "AAC"
+  },
+  {
     "name": "AV1",
     "description": "Matches the 'AV1' Regex Pattern",
     "tags": [
@@ -2367,6 +2437,62 @@
       }
     ],
     "_id": "Amazon Prime (2160p)"
+  },
+  {
+    "name": "Amazon Prime [720p]",
+    "description": "Matches 720p 'Amazon Prime' WEB-DLs, optimized for 720p streaming profiles",
+    "tags": [
+      "Streaming Service",
+      "WEB-DL"
+    ],
+    "conditions": [
+      {
+        "name": "720p",
+        "negate": false,
+        "required": true,
+        "resolution": "720p",
+        "type": "resolution"
+      },
+      {
+        "name": "AMZN Regex",
+        "negate": false,
+        "pattern": "\\b(?:amzn|(?:AMZN|Amazon)(?=\\s*(?:WEB-?DL|HD)))\\b",
+        "required": true,
+        "type": "release_title"
+      },
+      {
+        "name": "WEBRip",
+        "negate": true,
+        "required": true,
+        "source": "webrip",
+        "type": "source"
+      },
+      {
+        "name": "x265",
+        "negate": true,
+        "pattern": "^(?!.*(?i:remux))(?=.*([x]\\s?(\\.?265)\\b|HEVC|\\bDS4K\\b)).*$",
+        "required": false,
+        "type": "release_title"
+      }
+    ],
+    "tests": [
+      {
+        "expected": true,
+        "id": 1,
+        "input": "Movie.2024.720p.AMZN.WEB-DL.DD5.1.H.264-NTb"
+      },
+      {
+        "expected": false,
+        "id": 2,
+        "input": "Movie.2024.1080p.AMZN.WEB-DL.DD5.1.H.264-NTb"
+      },
+      {
+        "expected": false,
+        "id": 3,
+        "input": "Movie.2024.720p.AMZN.WEBRip.x265.H.264-GROUP"
+      }
+    ],
+    "_id": "Amazon Prime (720p)"
   },
   {
     "name": "Amazon Prime",
@@ -3542,6 +3668,62 @@
       }
     ],
     "_id": "Disney+ (2160p)"
+  },
+  {
+    "name": "Disney+ [720p]",
+    "description": "Matches 720p 'Disney+' WEB-DLs, optimized for 720p streaming profiles",
+    "tags": [
+      "Streaming Service",
+      "WEB-DL"
+    ],
+    "conditions": [
+      {
+        "name": "720p",
+        "negate": false,
+        "required": true,
+        "resolution": "720p",
+        "type": "resolution"
+      },
+      {
+        "name": "Disney+ Regex",
+        "negate": false,
+        "pattern": "\\b(dsnp|dsny(p)?|disney\\+)\\s*\\b",
+        "required": true,
+        "type": "release_title"
+      },
+      {
+        "name": "WEBRip",
+        "negate": true,
+        "required": true,
+        "source": "webrip",
+        "type": "source"
+      },
+      {
+        "name": "x265",
+        "negate": true,
+        "pattern": "^(?!.*(?i:remux))(?=.*([x]\\s?(\\.?265)\\b|HEVC|\\bDS4K\\b)).*$",
+        "required": false,
+        "type": "release_title"
+      }
+    ],
+    "tests": [
+      {
+        "expected": true,
+        "id": 1,
+        "input": "Movie.2024.720p.DSNP.WEB-DL.DD5.1.H.264-NTb"
+      },
+      {
+        "expected": false,
+        "id": 2,
+        "input": "Movie.2024.1080p.DSNP.WEB-DL.DD5.1.H.264-NTb"
+      },
+      {
+        "expected": false,
+        "id": 3,
+        "input": "Movie.2024.720p.DSNP.WEBRip.x265.H.264-GROUP"
+      }
+    ],
+    "_id": "Disney+ (720p)"
   },
   {
     "name": "Disney+",
@@ -5205,6 +5387,62 @@
       }
     ],
     "_id": "Netflix (2160p)"
+  },
+  {
+    "name": "Netflix [720p]",
+    "description": "Matches 720p 'Netflix' WEB-DLs, optimized for 720p streaming profiles",
+    "tags": [
+      "Streaming Service",
+      "WEB-DL"
+    ],
+    "conditions": [
+      {
+        "name": "720p",
+        "negate": false,
+        "required": true,
+        "resolution": "720p",
+        "type": "resolution"
+      },
+      {
+        "name": "Netflix Regex",
+        "negate": false,
+        "pattern": "\\b(nf|netflix)\\b",
+        "required": true,
+        "type": "release_title"
+      },
+      {
+        "name": "WEBRip",
+        "negate": true,
+        "required": true,
+        "source": "webrip",
+        "type": "source"
+      },
+      {
+        "name": "x265",
+        "negate": true,
+        "pattern": "^(?!.*(?i:remux))(?=.*([x]\\s?(\\.?265)\\b|HEVC|\\bDS4K\\b)).*$",
+        "required": false,
+        "type": "release_title"
+      }
+    ],
+    "tests": [
+      {
+        "expected": true,
+        "id": 1,
+        "input": "Movie.2024.720p.NF.WEB-DL.DD5.1.H.264-NTb"
+      },
+      {
+        "expected": false,
+        "id": 2,
+        "input": "Movie.2024.1080p.NF.WEB-DL.DD5.1.H.264-NTb"
+      },
+      {
+        "expected": false,
+        "id": 3,
+        "input": "Movie.2024.720p.NF.WEBRip.x265.H.264-GROUP"
+      }
+    ],
+    "_id": "Netflix (720p)"
   },
   {
     "name": "Netflix",
@@ -8737,6 +8975,41 @@
     ],
     "tests": [],
     "_id": "x264 (2160p)"
+  },
+  {
+    "name": "x264 (Streaming)",
+    "description": "Matches 'x264' codec specifically for streaming profiles, allows WEB-DL sources for compatibility",
+    "tags": [
+      "Codec",
+      "Streaming"
+    ],
+    "conditions": [
+      {
+        "name": "x264",
+        "negate": false,
+        "pattern": "^(?!.*(?i:remux)).*([xh](\\.?264)|DVDRip)",
+        "required": true,
+        "type": "release_title"
+      }
+    ],
+    "tests": [
+      {
+        "expected": true,
+        "id": 1,
+        "input": "Movie.2024.720p.WEB-DL.DD5.1.x264-GROUP"
+      },
+      {
+        "expected": true,
+        "id": 2,
+        "input": "Show.S01E01.720p.AMZN.WEB-DL.AAC.x264-NTb"
+      },
+      {
+        "expected": false,
+        "id": 3,
+        "input": "Movie.2024.720p.WEB-DL.x265.H.264-GROUP"
+      }
+    ],
+    "_id": "x264 (Streaming)"
   },
   {
     "name": "x264",

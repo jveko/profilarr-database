@@ -1,0 +1,46 @@
+name: AAC
+description: Matches 'AAC' audio codec for efficient streaming, with negation to avoid conflicts
+tags:
+- Audio
+- Codec
+conditions:
+- name: AAC
+  negate: false
+  pattern: AAC
+  required: true
+  type: release_title
+- name: Not PCM
+  negate: true
+  pattern: PCM
+  required: false
+  type: release_title
+- name: Not DTS
+  negate: true
+  pattern: DTS
+  required: false
+  type: release_title
+- name: Not TrueHD
+  negate: true
+  pattern: TrueHD
+  required: false
+  type: release_title
+- name: Not FLAC
+  negate: true
+  pattern: FLAC
+  required: false
+  type: release_title
+- name: Not Dolby Digital
+  negate: true
+  pattern: Dolby Digital
+  required: false
+  type: release_title
+tests:
+- expected: true
+  id: 1
+  input: "Movie.2024.720p.WEB-DL.AAC.2.0.H.264-GROUP"
+- expected: false
+  id: 2
+  input: "Show.S01E01.720p.AMZN.WEB-DL.DD+5.1.AAC.x264-NTb"
+- expected: false
+  id: 3
+  input: "Movie.2024.720p.WEB-DL.DD5.1.H.264-GROUP"
