@@ -7,6 +7,7 @@ description: 'Optimized for Zurg + rclone + Jellyfin streaming workflows. Priori
 - Strict resolution filtering: Blocks all non-720p content except SD fallback
 - Fallback: SD Golden Popcorn and quality tiers when 720p unavailable
 - Future-ready: Limited AV1 support for emerging codec adoption'
+
 tags:
 - 720p
 - Streaming
