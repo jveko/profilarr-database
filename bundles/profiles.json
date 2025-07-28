@@ -2723,7 +2723,7 @@
     "_id": "2160p Remux"
   },
   {
-    "name": "720p Streaming",
+    "name": "Streaming",
     "description": "Optimized for Zurg + rclone + Jellyfin streaming workflows. Prioritizes 720p content with minimal file sizes for efficient bandwidth usage and fast streaming startup. Enhanced with resolution-specific streaming service formats and improved codec compatibility.\n- Primary target: 720p WEB-DL from major streaming services (Netflix, Amazon Prime, Disney+) - Codec priority: h265/HEVC > x265 > x264 (streaming-compatible) for efficiency vs compatibility balance - Audio priority: AAC > Dolby Digital+ > Dolby Digital for streaming efficiency - Strict resolution filtering: Blocks all non-720p content except SD fallback - Fallback: SD Golden Popcorn and quality tiers when 720p unavailable - Future-ready: Limited AV1 support for emerging codec adoption",
     "tags": [
       "720p",
